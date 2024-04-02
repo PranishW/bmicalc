@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import './bmi.css'
 function App() {
-  const [calc, setcalc] = useState({ age: '', ht: '', wt: '' })
-  const [boolres,setboolres] = useState(false)
-  const [bres,setbres] = useState('')
-  const [rel,setrel] = useState('')
+  const [calc, setcalc] = useState({ age: '', ht: '', wt: '',gender: '' }) // to get input form data
+  const [boolres, setboolres] = useState(false) // manage output div state 
+  const [bres, setbres] = useState('')  // manage result
+  const [rel, setrel] = useState('')    // manage 'Normal' result output
   const bmi = () => {
-    return parseFloat(calc.wt) * 10000 / (parseFloat(calc.ht) * parseFloat(calc.ht));
+    return parseFloat(calc.wt) * 10000 / (parseFloat(calc.ht) * parseFloat(calc.ht));     // bmi calculation
   }
+  // Setting result based on bmi value calculated
   function endres() {
     if (bmi() < 16) {
       setrel('Severe Thinness');
@@ -36,7 +37,7 @@ function App() {
   }
   const Clickres = (e) => {
     setboolres(false)
-    setcalc({ age: '', ht: '', wt: '' })
+    setcalc({ age: '', ht: '', wt: '',gender: '' })
     setbres('');
     setrel('');
   }
@@ -81,14 +82,10 @@ function App() {
                       </div>
                     </div>
                     <div className="control is-size-5">
-                      <label className="radio">
-                        <input type="radio" name="gender" id="male" value="male" />
-                        Male
-                      </label>
-                      <label className="radio">
-                        <input type="radio" name="gender" id="female" value="female" />
-                        Female
-                      </label>
+                      <label htmlFor="male" className="radio">  Male</label>
+                      <input type="radio" name="gender" id="male" value="Male" onChange={onChange} checked={calc.gender==='Male'}/>
+                      <label htmlFor="female" className="radio">Female</label>
+                      <input type="radio" name="gender" id="female" value="Female" onChange={onChange} checked={calc.gender==='Female'}/>
                     </div>
                   </div>
                 </div>
@@ -115,8 +112,8 @@ function App() {
             </div>
           </div>
         </div>
-      </section >
-    </div >
+      </section>
+    </div>
   );
 }
 
